@@ -1,0 +1,9 @@
+FROM ubuntu:18.04
+
+COPY ./api_consultaCeps ./api_consultaCeps
+
+ENTRYPOINT ./api_consultaCeps
+
+# docker build -t api/consultaceps .
+# docker run -p 8082:8082 -d api/consultaceps
+
