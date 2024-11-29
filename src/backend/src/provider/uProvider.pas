@@ -53,24 +53,25 @@ begin
     try
       FConexao.Connected := False;
       FConexao.DriverName := 'MySQL';
+      FConexao.Params.Values['CharacterSet'] := 'utf8mb4';
 
       {$IFDEF MSWINDOWS}
-        FConexao.Params.Values['Server']       := 'localhost';
+        FConexao.Params.Values['Server']       := '127.0.0.1';
         FConexao.Params.Values['Database']     := 'dbsCeps';
         FConexao.Params.Values['Port']         := '3306';
         FConexao.Params.Values['User_Name']    := 'admin';
         FConexao.Params.Values['Password']     := 'masterkey';
-        FConexao.Params.Values['CharacterSet'] := 'utf8mb4';
       {$ELSE}
         FConexao.Params.Values['Server']    := GetEnvironmentVariable('DB_HOST');
         FConexao.Params.Values['Database']  := GetEnvironmentVariable('DB_NAME');
         FConexao.Params.Values['Port']      := GetEnvironmentVariable('DB_PORT');
         FConexao.Params.Values['User_Name'] := GetEnvironmentVariable('DB_USER');
         FConexao.Params.Values['Password']  := GetEnvironmentVariable('DB_PASSWORD');
-        FConexao.Params.Values['CharacterSet'] := 'utf8mb4';
         FConexao.Params.Values['Protocol']     := 'TCPIP';
       {$ENDIF}
+
       FConexao.Connected := True;
+
     except
       on E: Exception do
       begin

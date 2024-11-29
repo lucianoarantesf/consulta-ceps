@@ -21,7 +21,7 @@ type
     constructor Create;
     destructor Destroy; override;
 
-    function BuscarCep(const aCep: string): TJsonObject;
+    function BuscarCep(const aCep: string = ''): TJsonObject;
   end;
 
 implementation
@@ -49,6 +49,7 @@ begin
     LQuery := TFDQuery.Create(nil);
     try
       LQuery.Connection := FProvider.Conexao;
+
       LQuery.SQL.Clear;
       LQuery.SQL.Add('SELECT cep,                              ');
       LQuery.SQL.Add('       uf,                               ');
@@ -57,6 +58,7 @@ begin
       LQuery.SQL.Add('       descricao_sem_numero as logradouro');
       LQuery.SQL.Add('FROM logradouro                          ');
       LQuery.SQL.Add('WHERE 1 = 1                              ');
+
       if not aCep.IsEmpty then
       begin
         LQuery.SQL.Add('AND cep = :cep');
