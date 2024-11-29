@@ -1,6 +1,5 @@
 FROM ubuntu:18.04
 
-# Atualizar os pacotes e instalar dependências
 RUN apt-get update && \
     apt-get install -y \
     libmysqlclient-dev \
@@ -13,7 +12,6 @@ RUN apt-get update && \
 
 COPY ./api_consultaCeps ./api_consultaCeps
 
-# Definir o ponto de entrada
 ENTRYPOINT ["./api_consultaCeps"]
 
 # Comando para construir a imagem
