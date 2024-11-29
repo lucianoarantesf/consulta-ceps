@@ -1,20 +1,35 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:latest
-    container_name: postgres_container
+  mysql:
+    image: mysql:5.7
+    container_name: mysql_container
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: masterkey
-      POSTGRES_DB: dbsCEPS
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: masterkey
+      MYSQL_DATABASE: dbsCeps
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
+
+  # app:
+  #   build: .
+  #   container_name: app_container
+  #   depends_on:
+  #     - mysql
+  #   ports:
+  #     - "8082:8082"
+  #   environment:
+  #     DB_HOST: mysql
+  #     DB_PORT: 3306
+  #     DB_USER: usuario
+  #     DB_PASSWORD: senha
+  #     DB_NAME: meubanco
 
 volumes:
-  postgres_data:
+  mysql_data:
     driver: local
 
 

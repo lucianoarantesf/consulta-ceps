@@ -3,22 +3,16 @@ program api_consultaCeps;
 {$APPTYPE CONSOLE}
 {$R *.res}
 
-uses Horse, System.SysUtils;
+uses
+  Horse,
+  System.SysUtils,
+  uProvider in 'src\provider\uProvider.pas',
+  uServices in 'src\services\uServices.pas',
+  uController in 'src\controllers\uController.pas';
 
 begin
-  THorse.Get('/ping',
-    procedure(Req: THorseRequest; Res: THorseResponse)
-    begin
-      Res.Send('pong');
-    end);
 
-  THorse.Get('/env',
-    procedure(Req: THorseRequest; Res: THorseResponse)
-    begin
-      Res.Send(Format('Db Host: %s Db Port: %s',
-        [GetEnvironmentVariable('DB_HOST'),
-        GetEnvironmentVariable('DB_PORT')]));
-    end);
+  TController.registry;
 
   THorse.Listen(8082);
 

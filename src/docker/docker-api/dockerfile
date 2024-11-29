@@ -1,9 +1,26 @@
+# Usando uma imagem base do Ubuntu
 FROM ubuntu:18.04
 
+# Atualizar os pacotes e instalar dependências do PostgreSQL e FireDAC
+RUN apt-get update && \
+    apt-get install -y \
+    libpq-dev \
+    build-essential \
+    curl \
+    wget \
+    git \
+    && apt-get clean
+
+# Copiar o binário da API para o contêiner
 COPY ./api_consultaCeps ./api_consultaCeps
 
-ENTRYPOINT ./api_consultaCeps
+# Definir o ponto de entrada
+ENTRYPOINT ["./api_consultaCeps"]
 
+# Comando para construir a imagem
 # docker build -t api/consultaceps .
-# docker run -p 8082:8082 -d api/consultaceps
+
+# Comando para rodar o contêiner
+# docker run --env-file .env -p 8082:8082 -d api/consultaceps
+
 
