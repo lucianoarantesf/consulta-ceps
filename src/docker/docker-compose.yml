@@ -14,23 +14,6 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
-  # app:
-  #   build: .
-  #   container_name: app_container
-  #   depends_on:
-  #     - mysql
-  #   ports:
-  #     - "8082:8082"
-  #   environment:
-  #     DB_HOST: mysql
-  #     DB_PORT: 3306
-  #     DB_USER: usuario
-  #     DB_PASSWORD: senha
-  #     DB_NAME: meubanco
-
 volumes:
   mysql_data:
     driver: local
-
-
-# docker compose up -d

@@ -34,10 +34,8 @@ begin
       lJsonRequest.AddPair('cep', IfThen(Req.Query.ContainsKey('cep'),
         Req.Query.Field('cep').AsString, ''));
 
-      lJsonResponse := TJsonObject.ParseJSONValue
-        (TEncoding.UTF8.GetBytes(FService.BuscarCep
-        (lJsonRequest.GetValue<string>('cep')).ToJSONObjectString), 0)
-        AS TJsonObject;
+      lJsonResponse.AddPair('cep',
+        FService.BuscarCep(lJsonRequest.GetValue<string>('cep')));
 
       Res.ContentType('application/json; charset=utf-8')
         .Send(lJsonResponse.ToJSON).status(200);
@@ -59,8 +57,47 @@ begin
       lJsonResponseErro.AddPair('result', e.Message);
 
       Res.ContentType('application/json; charset=utf-8')
-        .Send(lJsonResponse.ToJSON)
-        .status(lJsonResponse.GetValue<integer>('status'));
+        .Send(lJsonResponseErro.ToJSON)
+        .status(lJsonResponseErro.GetValue<integer>('status'));
+
+      lJsonResponseErro.Free;
+    end;
+  end;
+end;
+
+// metodo anonimo onde contem a requisição horse
+procedure GetEnv(Req: THorseRequest; Res: THorseResponse);
+var
+  lJsonResponse, lJsonResponseErro: TJsonObject;
+begin
+
+  try
+    lJsonResponse := TJsonObject.Create;
+    try
+
+      lJsonResponse.AddPair('DB_HOST', GetEnvironmentVariable('DB_HOST'));
+      lJsonResponse.AddPair('DB_NAME', GetEnvironmentVariable('DB_NAME'));
+      lJsonResponse.AddPair('DB_PORT', GetEnvironmentVariable('DB_PORT'));
+      lJsonResponse.AddPair('DB_USER', GetEnvironmentVariable('DB_USER'));
+      lJsonResponse.AddPair('DB_PASSWORD',
+        GetEnvironmentVariable('DB_PASSWORD'));
+
+      Res.ContentType('application/json; charset=utf-8')
+        .Send(lJsonResponse.ToJSON).status(200);
+    finally
+      if assigned(lJsonResponse) then
+        FreeAndNil(lJsonResponse);
+    end;
+  except
+    on e: exception do
+    begin
+      lJsonResponseErro := TJsonObject.Create;
+      lJsonResponseErro.AddPair('status', 500);
+      lJsonResponseErro.AddPair('result', e.Message);
+
+      Res.ContentType('application/json; charset=utf-8')
+        .Send(lJsonResponseErro.ToJSON)
+        .status(lJsonResponseErro.GetValue<integer>('status'));
 
       lJsonResponseErro.Free;
     end;
@@ -70,6 +107,7 @@ end;
 class procedure TController.registry;
 begin
   THorse.Get('/cep', GetCep);
+  THorse.Get('/env', GetEnv);
 end;
 
 end.

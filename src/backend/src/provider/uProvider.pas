@@ -4,12 +4,16 @@ interface
 
 uses
   System.SysUtils,
-  FireDAC.Phys.MySQLDef, FireDAC.Stan.Intf,
+{$IFDEF MSWINDOWS}
+  FireDAC.Phys.MySQLDef,
+{$ELSE}
+  FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL,
+{$ENDIF}
+  FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Error,
   FireDAC.UI.Intf, FireDAC.Phys.Intf,
   FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Stan.Async, FireDAC.Phys,
-  FireDAC.Phys.MySQL, FireDAC.ConsoleUI.Wait,
   Data.DB, FireDAC.Comp.Client;
 
 type
@@ -47,18 +51,25 @@ begin
   begin
     FConexao := TFDConnection.Create(nil);
     try
-      FConexao.DriverName := 'MySQL'; // Alterado para MySQL
-      {$IFDEF DEBUG}
-        FConexao.Params.Values['Server'] := 'localhost';
-        FConexao.Params.Values['Database'] := 'dbsCeps'; // Nome do banco de dados no MySQL
-      {$ELSE}
-        FConexao.Params.Values['Server'] := GetEnvironmentVariable('DB_HOST');
-        FConexao.Params.Values['Database'] := GetEnvironmentVariable('DB_NAME');
-      {$ENDIF}
-      FConexao.Params.Values['Port'] := '3306'; // A porta padrão do MySQL é 3306
-      FConexao.Params.Values['User_Name'] := 'admin'; // Alterar para o nome do usuário do MySQL
-      FConexao.Params.Values['Password'] := 'masterkey'; // Alterar para a senha do usuário do MySQL
+      FConexao.Connected := False;
+      FConexao.DriverName := 'MySQL';
 
+      {$IFDEF MSWINDOWS}
+        FConexao.Params.Values['Server']       := 'localhost';
+        FConexao.Params.Values['Database']     := 'dbsCeps';
+        FConexao.Params.Values['Port']         := '3306';
+        FConexao.Params.Values['User_Name']    := 'admin';
+        FConexao.Params.Values['Password']     := 'masterkey';
+        FConexao.Params.Values['CharacterSet'] := 'utf8mb4';
+      {$ELSE}
+        FConexao.Params.Values['Server']    := GetEnvironmentVariable('DB_HOST');
+        FConexao.Params.Values['Database']  := GetEnvironmentVariable('DB_NAME');
+        FConexao.Params.Values['Port']      := GetEnvironmentVariable('DB_PORT');
+        FConexao.Params.Values['User_Name'] := GetEnvironmentVariable('DB_USER');
+        FConexao.Params.Values['Password']  := GetEnvironmentVariable('DB_PASSWORD');
+        FConexao.Params.Values['CharacterSet'] := 'utf8mb4';
+        FConexao.Params.Values['Protocol']     := 'TCPIP';
+      {$ENDIF}
       FConexao.Connected := True;
     except
       on E: Exception do
@@ -73,4 +84,3 @@ begin
 end;
 
 end.
-

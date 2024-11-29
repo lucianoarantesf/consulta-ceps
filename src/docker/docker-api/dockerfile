@@ -1,17 +1,16 @@
-# Usando uma imagem base do Ubuntu
 FROM ubuntu:18.04
 
-# Atualizar os pacotes e instalar dependências do PostgreSQL e FireDAC
+# Atualizar os pacotes e instalar dependências
 RUN apt-get update && \
     apt-get install -y \
-    libpq-dev \
+    libmysqlclient-dev \
     build-essential \
     curl \
     wget \
     git \
     && apt-get clean
 
-# Copiar o binário da API para o contêiner
+
 COPY ./api_consultaCeps ./api_consultaCeps
 
 # Definir o ponto de entrada

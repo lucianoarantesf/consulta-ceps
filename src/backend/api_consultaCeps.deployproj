@@ -11,6 +11,16 @@
     </PropertyGroup>
     <ItemGroup Condition="'$(Platform)'=='OSX64'"/>
     <ItemGroup Condition="'$(Platform)'=='Win32'">
+        <DeployFile Include="Win32\Release\api_consultaCeps.exe" Condition="'$(Config)'=='Release'">
+            <RemoteDir>api_consultaCeps\</RemoteDir>
+            <RemoteName>api_consultaCeps.exe</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
         <DeployFile Include="Win32\Debug\api_consultaCeps.exe" Condition="'$(Config)'=='Debug'">
             <RemoteDir>api_consultaCeps\</RemoteDir>
             <RemoteName>api_consultaCeps.exe</RemoteName>
