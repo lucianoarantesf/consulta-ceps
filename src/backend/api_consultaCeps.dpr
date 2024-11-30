@@ -14,6 +14,11 @@ uses
   uModels.Error in 'src\models\uModels.Error.pas';
 
 begin
+  {$IFDEF DEBUG}
+    ReportMemoryLeaksOnShutdown := True;
+  {$ENDIF}
+
+
   THorse.Use(HorseSwagger);
 
   TController.registry;
