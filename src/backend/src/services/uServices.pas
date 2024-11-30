@@ -3,7 +3,7 @@ unit UServices;
 interface
 
 uses
-  System.SysUtils, DataSet.Serialize, system.JSON,
+  System.SysUtils, DataSet.Serialize, System.JSON,
   FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error,
   FireDAC.DatS, FireDAC.Phys.Intf,
@@ -76,7 +76,7 @@ begin
     begin
       if Assigned(LQuery) then
         FreeAndNil(LQuery);
-      raise Exception.Create('Erro ao buscar CEP: ' + E.Message);
+      raise Exception.Create('Erro ao buscar CEP -> ' + E.Message);
     end;
   end;
 end;

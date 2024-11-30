@@ -4,11 +4,7 @@ interface
 
 uses
   System.SysUtils,
-{$IFDEF MSWINDOWS}
-  FireDAC.Phys.MySQLDef,
-{$ELSE}
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL,
-{$ENDIF}
   FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Error,
   FireDAC.UI.Intf, FireDAC.Phys.Intf,
@@ -56,7 +52,7 @@ begin
       FConexao.Params.Values['CharacterSet'] := 'utf8mb4';
 
       {$IFDEF MSWINDOWS}
-        FConexao.Params.Values['Server']       := '127.0.0.1';
+        FConexao.Params.Values['Server']       := '192.168.100.237';
         FConexao.Params.Values['Database']     := 'dbsCeps';
         FConexao.Params.Values['Port']         := '3306';
         FConexao.Params.Values['User_Name']    := 'admin';
@@ -76,7 +72,7 @@ begin
       on E: Exception do
       begin
         FreeAndNil(FConexao);
-        raise Exception.Create('Erro ao configurar a conexão: ' + E.Message);
+        raise Exception.Create('Problema com a conexão: ' + E.Message);
       end;
     end;
   end;

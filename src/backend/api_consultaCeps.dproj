@@ -4,8 +4,8 @@
         <ProjectVersion>19.5</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
-        <Platform Condition="'$(Platform)'==''">Linux64</Platform>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>129</TargetedPlatforms>
         <AppType>Console</AppType>
         <MainSource>api_consultaCeps.dpr</MainSource>
@@ -154,7 +154,6 @@
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
         <DCC_ExeOutput>.\$(Platform)\$(Config)\file</DCC_ExeOutput>
         <DCC_DcuOutput>.\$(Platform)\$(Config)\lib</DCC_DcuOutput>
-        <DCC_UnitSearchPath>D:\git\consulta-ceps\src\backend\src\modules\dataset-serialize\src;D:\git\consulta-ceps\src\backend\src\modules\horse\src;D:\git\consulta-ceps\src\backend\src\modules\horse-basic-auth\src;D:\git\consulta-ceps\src\backend\src\modules\horse-cors\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_OSX64)'!=''">
         <DCC_UsePackage>DataSnapServer;fmx;DbxCommonDriver;bindengine;IndyIPCommon;FireDACCommonODBC;emsclient;IndyProtocols;Skia.Package.RTL;dbxcds;myprovider280;FmxTeeUI;unidac280;DBXFirebirdDriver;FireDACSqliteDriver;DbxClientDriver;soapmidas;dbexpress;Python;dacfmx280;inet;FireDACDBXDriver;fmxdae;CustomIPTransport;FireDACMSSQLDriver;IndySystem;FireDACCommon;DataSnapServerMidas;FireDACODBCDriver;unidacfmx280;bindcompdbx;rtl;FireDACMySQLDriver;frce;DBXSqliteDriver;DataSnapFireDAC;inetdbxpress;FireDAC;xmlrtl;dsnap;DBXOracleDriver;DBXInformixDriver;fmxobj;DataSnapNativeClient;pgprovider280;FireDACCommonDriver;IndyIPClient;dac280;oraprovider280;bindcompfmx;inetdb;FireDACASADriver;fmxFireDAC;DBXMySQLDriver;DataSnapCommon;fmxase;dbrtl;FireDACOracleDriver;Skia.Package.FMX;DataSnapIndy10ServerTransport;DBXInterBaseDriver;ibprovider280;FireDACMongoDBDriver;FireDACTDataDriver;liteprovider280;vquery280;bindcomp;IndyCore;RESTBackendComponents;tdsprovider280;RESTComponents;IndyIPServer;dsnapxml;DataSnapClient;DataSnapProviderClient;emsclientfiredac;FireDACPgDriver;FireDACDSDriver;tethering;CloudService;DBXSybaseASADriver;ACBr_OFX;FMXTee;PythonFmx;soaprtl;soapserver;FireDACIBDriver;$(DCC_UsePackage)</DCC_UsePackage>
@@ -195,11 +194,14 @@
     <PropertyGroup Condition="'$(Cfg_1_Linux64)'!=''">
         <Debugger_Launcher>/usr/bin/gnome-terminal -- &quot;%debuggee%&quot;</Debugger_Launcher>
         <DCC_Define>HORSE_DAEMON;$(DCC_Define)</DCC_Define>
-        <DCC_UnitSearchPath>.\src\modules\dataset-serialize\src;.\src\modules\horse\src;.\src\modules\horse-basic-auth\src;.\src\modules\horse-cors\src</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>.\src\modules\dataset-serialize\src;.\src\modules\horse\src;.\src\modules\horse-basic-auth\src;.\src\modules\horse-cors\src;.\src\modules\gbswagger-master\Source\Horse;.\src\modules\gbswagger-master\Source\Core;.\src\modules\gbswagger-master\Source\Validator;.\src\modules\gbswagger-master\Source\Resources</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_UnitSearchPath>.\src\modules\dataset-serialize\src;.\src\modules\horse\src;.\src\modules\horse-basic-auth\src;.\src\modules\horse-cors\src;.\src\modules\gbswagger-master\Source\Horse;.\src\modules\gbswagger-master\Source\Core;.\src\modules\gbswagger-master\Source\Validator;.\src\modules\gbswagger-master\Source\Resources;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_ExeOutput>.\$(Platform)\$(Config)\file</DCC_ExeOutput>
+        <DCC_DcuOutput>.\$(Platform)\$(Config)\lib</DCC_DcuOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -208,11 +210,14 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Linux64)'!=''">
-        <DCC_UnitSearchPath>.\src\modules\dataset-serialize\src;.\src\modules\horse\src;.\src\modules\horse-basic-auth\src;.\src\modules\horse-cors\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>.\src\modules\dataset-serialize\src;.\src\modules\horse\src;.\src\modules\horse-basic-auth\src;.\src\modules\horse-cors\src;.\src\modules\gbswagger-master\Source\Horse;.\src\modules\gbswagger-master\Source\Core;.\src\modules\gbswagger-master\Source\Validator;.\src\modules\gbswagger-master\Source\Resources;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_Define>HORSE_DAEMON;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_UnitSearchPath>.\src\modules\dataset-serialize\src;.\src\modules\horse\src;.\src\modules\horse-basic-auth\src;.\src\modules\horse-cors\src;.\src\modules\gbswagger-master\Source\Horse;.\src\modules\gbswagger-master\Source\Core;.\src\modules\gbswagger-master\Source\Validator;.\src\modules\gbswagger-master\Source\Resources;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_ExeOutput>.\$(Platform)\$(Config)\file</DCC_ExeOutput>
+        <DCC_DcuOutput>.\$(Platform)\$(Config)\lib</DCC_DcuOutput>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -221,6 +226,8 @@
         <DCCReference Include="src\provider\uProvider.pas"/>
         <DCCReference Include="src\services\uServices.pas"/>
         <DCCReference Include="src\controllers\uController.pas"/>
+        <DCCReference Include="src\models\uModels.Cep.pas"/>
+        <DCCReference Include="src\models\uModels.Error.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
